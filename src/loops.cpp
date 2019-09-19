@@ -4,6 +4,7 @@
 #include <cstdio>
 #include <ctime>
 #include <string>
+#include <stdexcept>
 
 namespace loops
 {
@@ -36,6 +37,7 @@ namespace loops
             case 0: return runJob(f, nReps, "regular for loop", sumLoop);
             case 1: return runJob(f, nReps, "recursion", recursion);
             case 2: return runJob(f, nReps, "templated", templated);
+            default: throw std::invalid_argument("method not known");
         }
     }
 }
