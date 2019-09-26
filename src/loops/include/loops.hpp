@@ -15,9 +15,9 @@ namespace loops
         const method& m);
 
     enum class Methods : int {
-    	Regular,
-    	Recursion,
-    	Templated
+        Regular,
+        Recursion,
+        Templated
     };
 
     double loop(const func&, const Methods& m, const int& nReps);

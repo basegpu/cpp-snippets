@@ -1,3 +1,6 @@
 [submodule "libs/googletest"]
 	path = libs/googletest
 	url = https://github.com/google/googletest.git
+[submodule "libs/armadillo"]
+	path = libs/armadillo
+	url = https://gitlab.com/conradsnicta/armadillo-code.git

@@ -1,5 +1,5 @@
-#include "loops/loops.hpp"
-#include "loops/functions.hpp"
+#include "include/loops.hpp"
+#include "include/functions.hpp"
 
 #include <cstdio>
 #include <ctime>
