@@ -19,16 +19,11 @@ namespace container
         arma::Mat<T>* Get();
 
     private:
-        enum class Type : char
-        {
-            Float,
-            Integer
-        };
 
-        Variant(const Type& type, const int& nRows, const int& nCols);
+        Variant(arma::Mat<int>* const obj);
+        Variant(arma::Mat<double>* const obj);
 
-        Type t;
-        arma::Mat<int>* obj_i;
-        arma::Mat<double>* obj_f;
+        arma::Mat<int>* const obj_i;
+        arma::Mat<double>* const obj_f;
     };
 }

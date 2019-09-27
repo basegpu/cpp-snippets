@@ -1,12 +1,13 @@
 #pragma once
 
-#include <map>
+#include <unordered_map>
+#include <armadillo>
 #include <string>
 #include "variant.hpp"
 
 namespace container
 {
-    class Container : private std::map<std::string, Variant_t>
+    class Container : private std::unordered_map<std::string, Variant_t>
     {
     public:
         ~Container();
@@ -20,5 +21,11 @@ namespace container
         int GetSize();
         
         Variant_t GetItem(const std::string& label);
+
+        template<typename T>
+        arma::Mat<T>* GetDataFrom(const std::string& label)
+        {
+            return this->GetItem(label)->Get<T>();
+        }
     };
 }

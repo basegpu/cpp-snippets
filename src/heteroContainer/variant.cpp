@@ -4,24 +4,18 @@
 
 namespace container
 {
-    Variant::Variant(const Type& type, const int& nRows, const int& nCols) :
-        t(type),
+    Variant::Variant(arma::Mat<double>* const obj) :
         obj_i(nullptr),
+        obj_f(obj)
+    {
+        ;
+    }
+
+    Variant::Variant(arma::Mat<int>* const obj) :
+        obj_i(obj),
         obj_f(nullptr)
     {
-        switch (this->t)
-        {
-            case Type::Float:
-            {
-                this->obj_f = new arma::Mat<double>(nRows, nCols, arma::fill::zeros);
-                return;
-            }
-            case Type::Integer:
-            {
-                this->obj_i = new arma::Mat<int>(nRows, nCols, arma::fill::zeros);
-                return;
-            }
-        }
+        ;
     }
     
     Variant::~Variant()
@@ -45,13 +39,15 @@ namespace container
     template<>
     Variant_t Variant::Create<double>(const int& nRows, const int& nCols)
     {
-        return new Variant(Variant::Type::Float, nRows, nCols);
+        auto v = new arma::Mat<double>(nRows, nCols, arma::fill::zeros);
+        return new Variant(v);
     }
 
     template<>
     Variant_t Variant::Create<int>(const int& nRows, const int& nCols)
     {
-        return new Variant(Variant::Type::Integer, nRows, nCols);
+        auto v = new arma::Mat<int>(nRows, nCols, arma::fill::zeros);
+        return new Variant(v);
     }
 
     template<typename T>
@@ -63,12 +59,20 @@ namespace container
     template<>
     arma::Mat<double>* Variant::Get()
     {
+        if (this->obj_f == nullptr)
+        {
+            throw std::invalid_argument("wrong data type");
+        }
         return this->obj_f;
     }
 
     template<>
     arma::Mat<int>* Variant::Get()
     {
+        if (this->obj_i == nullptr)
+        {
+            throw std::invalid_argument("wrong data type");
+        }
         return this->obj_i;
     }
 }
