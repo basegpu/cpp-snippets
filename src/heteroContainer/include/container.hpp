@@ -1,31 +1,49 @@
 #pragma once
 
 #include <unordered_map>
+#include <map>
 #include <armadillo>
-#include <string>
 #include "variant.hpp"
 
 namespace container
 {
-    class Container : private std::unordered_map<std::string, Variant_t>
+    template<class K>
+    class Container : private std::map<K, Variant_t>
     {
     public:
-        ~Container();
+        ~Container()
+        {
+            for (auto kv : *this)
+            {
+                delete kv.second;
+            }
+        }
 
         template<typename T>
-        void AddItem(const std::string& label, const int& nRows, const int& nCols)
+        void AddItem(const K& label, const int& nRows, const int& nCols)
         {
             this->operator[](label) = Variant::Create<T>(nRows, nCols);
         }
         
-        int GetSize();
+        int GetSize()
+        {
+            return this->size();
+        }
         
-        Variant_t GetItem(const std::string& label);
+        Variant_t GetItem(const K& label)
+        {
+            if (this->count(label) == 0)
+            {
+                throw std::out_of_range("no item found.");
+            }
+            return this->at(label);
+        }
 
         template<typename T>
-        arma::Mat<T>* GetDataFrom(const std::string& label)
+        arma::Mat<T>* GetDataFrom(const K& label)
         {
-            return this->GetItem(label)->Get<T>();
+            auto v = this->GetItem(label);
+            return v->template Get<T>();
         }
     };
 }
