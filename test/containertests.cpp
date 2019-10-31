@@ -76,7 +76,7 @@ TEST(ContainerTests, EnumKey)
     const int nAccess = 10000000;
     for (int ii = 0; ii < nAccess; ii++)
     {
-        auto d = c.GetDataFrom<int>(Keys::Key1);
+        c.GetDataFrom<int>(Keys::Key1);
     }
 }
 
@@ -93,6 +93,6 @@ TEST(ContainerTests, Performance)
     const int label = ll - 1;
     for (int ii = 0; ii < nAccess; ii++)
     {
-        auto d = c.GetDataFrom<int>(label);
+        c.GetDataFrom<int>(label);
     }
 }
