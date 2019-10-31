@@ -6,11 +6,8 @@ namespace pointers
 {
     typedef struct Data
     {
+        Data() : T_(nullptr), Tplus1_(nullptr) {}
         Data(int* T, int* Tp1) : T_(T), Tplus1_(Tp1) {}
-        int* GetT()
-        {
-            return this->T_;
-        }
         int* GetTplus1()
         {
             return this->Tplus1_;

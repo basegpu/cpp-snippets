@@ -3,20 +3,29 @@
 
 using namespace pointers;
 
-
-TEST(PointerTests, WithoutSwapping)
+class PointerTest :
+    public ::testing::Test
 {
-	int i1 = 1, i2 = 2;
-	auto d = Data(&i1, &i2);
-    ASSERT_EQ(i1, *d.GetT());
-    ASSERT_EQ(i2, *d.GetTplus1());
+protected:
+	int i1;
+	int i2;
+	Data d;
+
+	void SetUp() override
+	{
+		this->i1 = 1;
+		this->i2 = 2;
+		d = Data(&this->i1, &this->i2);
+	}
+};
+
+TEST_F(PointerTest, WithoutSwapping)
+{
+    ASSERT_EQ(i2, *this->d.GetTplus1());
 }
 
-TEST(PointerTests, WithSwapping)
+TEST_F(PointerTest, WithSwapping)
 {
-	int i1 = 1, i2 = 2;
-	auto d = Data(&i1, &i2);
-	d.Swap();
-    ASSERT_EQ(i2, *d.GetT());
-    ASSERT_EQ(i1, *d.GetTplus1());
+	this->d.Swap();
+    ASSERT_EQ(i1, *this->d.GetTplus1());
 }
