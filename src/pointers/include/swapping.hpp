@@ -7,9 +7,17 @@ namespace pointers
     typedef struct Data
     {
         Data(int* T, int* Tp1) : T_(T), Tplus1_(Tp1) {}
+        int* GetT()
+        {
+            return this->T_;
+        }
+        int* GetTplus1()
+        {
+            return this->Tplus1_;
+        }
         void swap()
         {
-            std::swap(T_, Tplus1_);
+            std::swap(this->T_, this->Tplus1_);
         }
     private:
         int* T_;

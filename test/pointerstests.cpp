@@ -4,9 +4,10 @@
 using namespace pointers;
 
 
-TEST(PointerTests, First)
+TEST(PointerTests, WithoutSwapping)
 {
 	int i1 = 1, i2 = 2;
-	Data(&i1, &i2);
-    //ASSERT_DOUBLE_EQ(2.0, loop(f, Methods::Regular, 1e5));
+	auto d = Data(&i1, &i2);
+    ASSERT_EQ(i1, *d.GetT());
+    ASSERT_EQ(i2, *d.GetTplus1());
 }
