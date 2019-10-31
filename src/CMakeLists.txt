@@ -7,11 +7,13 @@ include_directories(
 	../libs/armadillo/include
     loops/include
     heteroContainer/include
+    pointers/include
 )
 
 file(GLOB sources
 	loops/*.cpp
-	heteroContainer/*.cpp)
+	heteroContainer/*.cpp
+	pointers/*.cpp)
 
 set(LibraryName snippets)
 
