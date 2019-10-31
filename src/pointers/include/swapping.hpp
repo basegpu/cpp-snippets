@@ -15,7 +15,7 @@ namespace pointers
         {
             return this->Tplus1_;
         }
-        void swap()
+        void Swap()
         {
             std::swap(this->T_, this->Tplus1_);
         }
