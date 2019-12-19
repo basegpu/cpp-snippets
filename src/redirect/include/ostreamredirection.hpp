@@ -6,11 +6,11 @@
 namespace redirect
 {
     
-    class ScopedRedirect
+    class OStreamRedirection
     {
     public:
 
-        ScopedRedirect(std::ostream& original, std::ostream& target) :
+        OStreamRedirection(std::ostream& original, std::ostream& target) :
             original_(original),
             buffer_orig(original.rdbuf())
         {
@@ -18,7 +18,7 @@ namespace redirect
             this->original_.rdbuf(target.rdbuf());
         }
 
-        ~ScopedRedirect()
+        ~OStreamRedirection()
         {
             this->original_.rdbuf(this->buffer_orig);
         }

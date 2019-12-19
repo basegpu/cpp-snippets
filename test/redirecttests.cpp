@@ -1,5 +1,5 @@
 #include <gtest/gtest.h>
-#include "scopedredirect.hpp"
+#include "ostreamredirection.hpp"
 
 using namespace redirect;
 
@@ -8,15 +8,15 @@ class RedirectTest :
 {
 protected:
 	std::ostringstream oss_;
-	ScopedRedirect* sr_;
+	OStreamRedirection* sr_;
 
 	void SetUp() override
 	{
-		this->sr_ = new ScopedRedirect(std::cout, this->oss_);
+		this->sr_ = new OStreamRedirection(std::cout, this->oss_);
 	}
 };
 
-TEST_F(RedirectTest, Dummy)
+TEST_F(RedirectTest, OStream)
 {
 	const std::string str = "should be captured";
 	std::cout << str;
