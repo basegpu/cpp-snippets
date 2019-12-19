@@ -1,11 +1,10 @@
 #pragma once
 
-#include <iostream> 
-#include <string>
+#include <iostream>
 
 namespace redirect
 {
-    
+
     class OStreamRedirection
     {
     public:

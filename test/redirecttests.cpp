@@ -1,26 +1,31 @@
 #include <gtest/gtest.h>
 #include "ostreamredirection.hpp"
+#include "coutcollector.hpp"
 
 using namespace redirect;
 
-class RedirectTest :
-    public ::testing::Test
-{
-protected:
-	std::ostringstream oss_;
-	OStreamRedirection* sr_;
+const std::string str_out = "should be captured";
 
-	void SetUp() override
-	{
-		this->sr_ = new OStreamRedirection(std::cout, this->oss_);
-	}
-};
-
-TEST_F(RedirectTest, OStream)
+TEST(RedirectTest, OStreamRedirection)
 {
-	const std::string str = "should be captured";
-	std::cout << str;
-	delete this->sr_;
+	std::ostringstream oss;
+	OStreamRedirection* sr = new OStreamRedirection(std::cout, oss);
+
+	std::cout << str_out;
+	delete sr;
+
 	std::cout << "on console" << std::endl;
-    ASSERT_EQ(str, this->oss_.str());
+    
+    ASSERT_EQ(str_out, oss.str());
+}
+
+TEST(RedirectTest, CoutCollector)
+{
+	{
+		CoutCollector logger;
+		std::cout << str_out;
+		ASSERT_EQ(str_out, logger.GetContent());
+	}
+
+	std::cout << "on console" << std::endl;
 }
