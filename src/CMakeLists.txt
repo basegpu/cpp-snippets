@@ -8,6 +8,7 @@ include_directories(
     loops/include
     heteroContainer/include
     pointers/include
+    redirect/include
 )
 
 file(GLOB sources
